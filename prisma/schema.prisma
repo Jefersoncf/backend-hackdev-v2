@@ -11,28 +11,56 @@ datasource db {
 }
 
 model Product {
-  id       Int       @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   name     String
   category String
-  size     ShoeSize?
+  size     String
   price    Int
   percent  Int
   discount Boolean
   details  String
+  active   Boolean @default(true)
+  image    String
 }
 
-enum ShoeSize {
-  BR_31
-  BR_40
-  BR_41
-  BR_43
+model User {
+  id       Int       @id @default(autoincrement())
+  name     String
+  email    String
+  nickName String
+  password String
+  active   Boolean   @default(true)
+  address  Address[]
+  sales    Sales[]
 }
 
-enum ClothingSize {
-  PP
-  P
-  M
-  G
-  GG
-  XG
+model Address {
+  id           Int     @id @default(autoincrement())
+  cep          String
+  street       String
+  neighborhood String
+  city         String
+  state        String
+  number       String
+  complement   String?
+  active       Boolean @default(true)
+  user         User    @relation(fields: [userId], references: [id])
+  userId       Int
+  Sales        Sales[]
+}
+
+model Sales {
+  id        Int     @id @default(autoincrement())
+  products  String
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
+  address   Address @relation(fields: [addressId], references: [id])
+  addressId Int
+  status    Status  @default(budgets)
+  total     Int
+}
+
+enum Status {
+  budgets
+  finished
 }
