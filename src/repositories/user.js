@@ -23,6 +23,7 @@ export async function getUserByLogin(login) {
 }
 
 export async function create(data) {
+  // console.log(data);
   const user = await prisma.user.create({ data });
   return user;
 }

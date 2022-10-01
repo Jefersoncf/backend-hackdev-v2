@@ -1,5 +1,7 @@
 import { Router } from 'express';
-import { listAll, create } from '../controller/products.js';
+import { create, listProducts } from '../controller/products.js';
+import { auth } from '../middleware/auth.js';
 export const products = Router();
-products.get('/list', listAll);
-products.post('/create', create);
+
+products.get('/list', listProducts);
+products.post('/create', auth, create);

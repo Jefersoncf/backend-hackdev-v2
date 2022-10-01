@@ -1,9 +1,9 @@
-import { list } from '../service/user/list.js';
+// import { list } from '../service/user/list.js';
 import { createUser } from '../service/user/create.js';
 
 export async function listAll() {
-  const response = await list();
-  return res.status(200).json(response);
+  // const response = await list();
+  // return res.status(200).json(response);
 }
 
 export async function create(req, res) {
